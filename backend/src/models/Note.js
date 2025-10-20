@@ -1,4 +1,4 @@
-import mongoose from "mongoode";
+import mongoose from "mongoose";
 // Steps to create a model :
 // 1: first need to create a schema for the model
 // 2: second create a model based on that schema.

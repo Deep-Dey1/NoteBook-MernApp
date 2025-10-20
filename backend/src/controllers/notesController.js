@@ -1,5 +1,14 @@
-export function getAllNotes(req, res){
-    res.status(200).send("fetched the notes sucessfully !");
+import Note from "../models/Note.js";
+export async function getAllNotes(req, res){
+    // res.status(200).send("fetched the notes sucessfully !"); // initially to learn how it works
+    try{
+        const notes = await Note.find();
+        res.status(200).json(notes)
+    } catch (error) {
+        console.error("Error in getAllNotes controller",error);
+        res.status(500).json({message:"INternal server error"})
+
+    }
 }
 
 export function createNote(req , res){
