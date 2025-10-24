@@ -1,24 +1,56 @@
-import React from 'react';
-import { Routes, Route } from "react-router-dom";
-import HomePage from "./pages/HomePage"
-import CreatePage from "./pages/CreatePage"
-import NoteDetailPage from "./pages/NoteDetailPage"
-import { toast } from "react-hot-toast";
-const App = () => {
-  return (<div data-theme="forest">
-    {/* sample use of react-hot-toast and tailwind css*/}
-     {/* <button onClick = {() => toast.error("congrats")} className="text-red-500 p-5 bg-slate-600">Click Me</button> */}
-    {/* testing daisyui buttons :  */}
-    <button className="btn btn-outline">Default</button>
-    <button className="btn btn-outline btn-primary">Primary</button>
-    <button className="btn btn-outline btn-secondary">Secondary</button>
-    <button className="btn btn-outline btn-accent">Accent</button>
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/create" element={<CreatePage />} />
-      <Route path="/:id" element={<NoteDetailPage />} />
-    </Routes>
-  </div>);
-};
+import { Route, Routes } from "react-router";
 
+import HomePage from "./pages/HomePage";
+import CreatePage from "./pages/CreatePage";
+import NoteDetailPage from "./pages/NoteDetailPage";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
+import OTPVerification from "./pages/OTPVerification";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
+import ProtectedRoute from "./components/ProtectedRoute";
+
+const App = () => {
+  return (
+    <div className="relative h-full w-full min-h-screen">
+      {/* Grid Background */}
+      <div className="absolute inset-0 -z-10 h-full w-full bg-black bg-[linear-gradient(to_right,#1f1f1f_1px,transparent_1px),linear-gradient(to_bottom,#1f1f1f_1px,transparent_1px)] bg-[size:6rem_4rem]" />
+
+      <Routes>
+        {/* Public routes */}
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/verify-otp" element={<OTPVerification />} />
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+        <Route path="/reset-password" element={<ResetPasswordPage />} />
+
+        {/* Protected routes */}
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <HomePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/create"
+          element={
+            <ProtectedRoute>
+              <CreatePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/note/:id"
+          element={
+            <ProtectedRoute>
+              <NoteDetailPage />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </div>
+  );
+};
 export default App;

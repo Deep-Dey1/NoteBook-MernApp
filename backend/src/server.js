@@ -1,41 +1,55 @@
+import "./config/env.js"; // Load environment variables first
 import express from "express";
-//const express = require("express")
-import notesRoutes from "./routes/notesRoutes.js"
+import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
+
+import notesRoutes from "./routes/notesRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
 import { connectDB } from "./config/db.js";
-// const notesRoutes = require("./routes/notesRoutes.js")
-// import for the ratelimiter 
 import rateLimiter from "./middleware/rateLimiter.js";
-import dotenv from "dotenv";
-dotenv.config();
+
+// Get __dirname equivalent in ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
-
 const PORT = process.env.PORT || 5001;
 
-// middleware we needed
-// creating during the building of the create node controller
-// to parse the json body
-app.use(express.json()); // this is middle ware
+// middleware
+if (process.env.NODE_ENV !== "production") {
+  app.use(
+    cors({
+      origin: "http://localhost:5173",
+      credentials: true,
+    })
+  );
+}
 
-// now genrating the console log in the backend server using the middle ware 
-// our simple custom middleware
-app.use((req,res,next) =>{
-	console.log("Server got a New Request : ");
-	console.log(`Req methode is ${req.method} & Req URL is ${req.url}`);
-	next();
-});
-
-// middleware for the ratelimit 
+app.use(express.json()); // this middleware will parse JSON bodies: req.body
 app.use(rateLimiter);
 
+// our simple custom middleware
+// app.use((req, res, next) => {
+//   console.log(`Req method is ${req.method} & Req URL is ${req.url}`);
+//   next();
+// });
 
-app.use("/api/notes", notesRoutes)
+// Routes
+app.use("/api/auth", authRoutes);
+app.use("/api/notes", notesRoutes);
 
-// first connect to db and then listen from the port or dont start the server
-connectDB().then(() =>{
-	app.listen(PORT, () =>{
-		console.log("Server started on PORT:", PORT);
-	});
+if (process.env.NODE_ENV === "production") {
+  const frontendDistPath = path.join(__dirname, "../../frontend/dist");
+  app.use(express.static(frontendDistPath));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(frontendDistPath, "index.html"));
+  });
+}
+
+connectDB().then(() => {
+  app.listen(PORT, () => {
+    console.log("Server started on PORT:", PORT);
+  });
 });
-
-
