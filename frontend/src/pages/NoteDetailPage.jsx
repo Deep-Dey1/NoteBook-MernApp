@@ -36,7 +36,7 @@ const NoteDetailPage = () => {
     try {
       await api.delete(`/notes/${id}`);
       toast.success("Note deleted");
-      navigate("/");
+      navigate("/dashboard");
     } catch (error) {
       console.log("Error deleting the note:", error);
       toast.error("Failed to delete note");
@@ -54,7 +54,7 @@ const NoteDetailPage = () => {
     try {
       await api.put(`/notes/${id}`, note);
       toast.success("Note updated successfully");
-      navigate("/");
+      navigate("/dashboard");
     } catch (error) {
       console.log("Error saving the note:", error);
       toast.error("Failed to update note");
@@ -76,7 +76,7 @@ const NoteDetailPage = () => {
       <div className="container mx-auto px-4 py-8 pt-24">
         <div className="max-w-2xl mx-auto">
           <div className="flex items-center justify-between mb-6">
-            <Link to="/" className="btn btn-ghost">
+            <Link to="/dashboard" className="btn btn-ghost">
               <ArrowLeftIcon className="h-5 w-5" />
               Back to Notes
             </Link>

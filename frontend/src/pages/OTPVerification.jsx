@@ -83,7 +83,7 @@ const OTPVerification = ({ email, onBack }) => {
       localStorage.setItem("token", res.data.token);
       loginWithOAuth(res.data.token);
       toast.success("Email verified successfully!");
-      navigate("/");
+      navigate("/dashboard");
     } catch (error) {
       console.error("OTP verification error:", error);
       toast.error(error.response?.data?.message || "Invalid OTP");

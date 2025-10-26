@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import api from "../lib/axios";
 import PasswordStrengthMeter from "../components/PasswordStrengthMeter";
 import OTPVerification from "./OTPVerification";
+import { Mail, Lock, User as UserIcon, Eye, EyeOff, ArrowRight } from "lucide-react";
 
 const RegisterPage = () => {
   const [name, setName] = useState("");
@@ -13,6 +14,8 @@ const RegisterPage = () => {
   const [loading, setLoading] = useState(false);
   const [showOTP, setShowOTP] = useState(false);
   const [registeredEmail, setRegisteredEmail] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const navigate = useNavigate();
 
@@ -69,82 +72,164 @@ const RegisterPage = () => {
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-8">
       <div className="max-w-md w-full">
-        <div className="card bg-base-100 shadow-xl">
+        {/* Logo/Brand */}
+        <div className="text-center mb-8 animate-fade-in-down">
+          <Link to="/" className="inline-block group">
+            <h1 className="text-4xl font-bold text-primary font-mono tracking-tight mb-2 hover:scale-105 transition-all duration-300 hover:drop-shadow-[0_0_15px_rgba(168,85,247,0.8)]">
+              NoteBook
+            </h1>
+          </Link>
+          <p className="text-base-content/70">Create your account to get started</p>
+        </div>
+
+        <div className="card bg-base-100 shadow-2xl border border-base-content/10 animate-fade-in-up hover:shadow-[0_20px_50px_rgba(168,85,247,0.4)] transition-all duration-500">
           <div className="card-body">
-            <h2 className="card-title text-3xl font-bold text-center justify-center mb-6">
-              Create Account
-            </h2>
-
-            <form onSubmit={handleSubmit}>
-              <div className="form-control mb-4">
+            <form onSubmit={handleSubmit} className="space-y-5">
+              {/* Name Input */}
+              <div className="form-control animate-slide-in-left" style={{ animationDelay: "0.1s" }}>
                 <label className="label">
-                  <span className="label-text">Name</span>
+                  <span className="label-text font-medium">Full Name</span>
                 </label>
-                <input
-                  type="text"
-                  placeholder="Enter your name"
-                  className="input input-bordered"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
+                <div className="relative group">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none transition-transform group-hover:scale-110 duration-300">
+                    <UserIcon className="size-5 text-base-content/40" />
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="John Doe"
+                    className="input input-bordered w-full pl-10 focus:input-primary transition-all hover:scale-[1.02] focus:scale-[1.02] duration-200"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                </div>
               </div>
 
-              <div className="form-control mb-4">
+              {/* Email Input */}
+              <div className="form-control animate-slide-in-right" style={{ animationDelay: "0.2s" }}>
                 <label className="label">
-                  <span className="label-text">Email</span>
+                  <span className="label-text font-medium">Email Address</span>
                 </label>
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="input input-bordered"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
+                <div className="relative group">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none transition-transform group-hover:scale-110 duration-300">
+                    <Mail className="size-5 text-base-content/40" />
+                  </div>
+                  <input
+                    type="email"
+                    placeholder="you@example.com"
+                    className="input input-bordered w-full pl-10 focus:input-primary transition-all hover:scale-[1.02] focus:scale-[1.02] duration-200"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
               </div>
 
-              <div className="form-control mb-4">
+              {/* Password Input */}
+              <div className="form-control animate-slide-in-left" style={{ animationDelay: "0.3s" }}>
                 <label className="label">
-                  <span className="label-text">Password</span>
+                  <span className="label-text font-medium">Password</span>
                 </label>
-                <input
-                  type="password"
-                  placeholder="Enter your password"
-                  className="input input-bordered"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-                <PasswordStrengthMeter password={password} />
+                <div className="relative group">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none transition-transform group-hover:scale-110 duration-300">
+                    <Lock className="size-5 text-base-content/40" />
+                  </div>
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Create a strong password"
+                    className="input input-bordered w-full pl-10 pr-10 focus:input-primary transition-all hover:scale-[1.02] focus:scale-[1.02] duration-200"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center transition-transform hover:scale-125 active:scale-95 duration-200"
+                  >
+                    {showPassword ? (
+                      <EyeOff className="size-5 text-base-content/40 hover:text-base-content/60" />
+                    ) : (
+                      <Eye className="size-5 text-base-content/40 hover:text-base-content/60" />
+                    )}
+                  </button>
+                </div>
+                {password && <PasswordStrengthMeter password={password} />}
               </div>
 
-              <div className="form-control mb-6">
+              {/* Confirm Password Input */}
+              <div className="form-control animate-slide-in-right" style={{ animationDelay: "0.4s" }}>
                 <label className="label">
-                  <span className="label-text">Confirm Password</span>
+                  <span className="label-text font-medium">Confirm Password</span>
                 </label>
-                <input
-                  type="password"
-                  placeholder="Confirm your password"
-                  className="input input-bordered"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                />
+                <div className="relative group">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none transition-transform group-hover:scale-110 duration-300">
+                    <Lock className="size-5 text-base-content/40" />
+                  </div>
+                  <input
+                    type={showConfirmPassword ? "text" : "password"}
+                    placeholder="Confirm your password"
+                    className="input input-bordered w-full pl-10 pr-10 focus:input-primary transition-all hover:scale-[1.02] focus:scale-[1.02] duration-200"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center transition-transform hover:scale-125 active:scale-95 duration-200"
+                  >
+                    {showConfirmPassword ? (
+                      <EyeOff className="size-5 text-base-content/40 hover:text-base-content/60" />
+                    ) : (
+                      <Eye className="size-5 text-base-content/40 hover:text-base-content/60" />
+                    )}
+                  </button>
+                </div>
+                {confirmPassword && password !== confirmPassword && (
+                  <label className="label">
+                    <span className="label-text-alt text-error animate-shake">Passwords do not match</span>
+                  </label>
+                )}
               </div>
 
+              {/* Submit Button */}
               <button
                 type="submit"
-                className="btn btn-primary w-full mb-4"
+                className="btn btn-primary w-full rounded-full text-base mt-2 animate-fade-in hover:scale-[1.03] active:scale-95 transition-all duration-200 shadow-lg hover:shadow-2xl"
+                style={{ animationDelay: "0.5s" }}
                 disabled={loading}
               >
-                {loading ? "Creating account..." : "Register"}
+                {loading ? (
+                  <>
+                    <span className="loading loading-spinner loading-sm"></span>
+                    Creating account...
+                  </>
+                ) : (
+                  <>
+                    Create Account
+                    <ArrowRight className="size-5 transition-transform group-hover:translate-x-1" />
+                  </>
+                )}
               </button>
             </form>
 
-            <p className="text-center mt-6">
-              Already have an account?{" "}
-              <Link to="/login" className="link link-primary">
-                Login here
-              </Link>
-            </p>
+            {/* Divider */}
+            <div className="divider my-6 animate-fade-in" style={{ animationDelay: "0.6s" }}>OR</div>
+
+            {/* Login Link */}
+            <div className="text-center animate-fade-in" style={{ animationDelay: "0.7s" }}>
+              <p className="text-base-content/70">
+                Already have an account?{" "}
+                <Link to="/login" className="link link-primary font-semibold hover:underline hover:scale-105 inline-block transition-transform">
+                  Sign in
+                </Link>
+              </p>
+            </div>
           </div>
+        </div>
+
+        {/* Back to Home */}
+        <div className="text-center mt-6 animate-fade-in" style={{ animationDelay: "0.8s" }}>
+          <Link to="/" className="text-sm text-base-content/60 hover:text-primary transition-all hover:scale-105 inline-block">
+            ← Back to home
+          </Link>
         </div>
       </div>
     </div>

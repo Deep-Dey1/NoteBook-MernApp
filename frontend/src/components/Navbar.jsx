@@ -35,7 +35,7 @@ const Navbar = () => {
     <header className={`fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 px-4 transition-transform duration-300 ${isVisible ? "translate-y-0" : "-translate-y-full"}`}>
       <div className="bg-base-300 backdrop-blur-lg bg-opacity-90 rounded-full shadow-2xl border border-base-content/20 px-6 py-3">
         <div className="flex items-center justify-between gap-8">
-          <Link to="/">
+          <Link to="/dashboard">
             <h1 className="text-2xl font-bold text-primary font-mono tracking-tight">
               NoteBook
             </h1>

@@ -8,6 +8,7 @@ import RegisterPage from "./pages/RegisterPage";
 import OTPVerification from "./pages/OTPVerification";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
+import LandingPage from "./pages/LandingPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
 
       <Routes>
         {/* Public routes */}
+        <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/verify-otp" element={<OTPVerification />} />
@@ -26,7 +28,7 @@ const App = () => {
 
         {/* Protected routes */}
         <Route
-          path="/"
+          path="/dashboard"
           element={
             <ProtectedRoute>
               <HomePage />
