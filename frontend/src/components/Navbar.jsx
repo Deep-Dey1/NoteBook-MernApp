@@ -6,15 +6,15 @@ const Navbar = () => {
   const { user, logout } = useAuth();
 
   return (
-    <header className="bg-base-300 border-b border-base-content/10">
-      <div className="mx-auto max-w-6xl p-4">
-        <div className="flex items-center justify-between">
+    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 px-4">
+      <div className="bg-base-300 backdrop-blur-lg bg-opacity-90 rounded-full shadow-2xl border border-base-content/20 px-6 py-3">
+        <div className="flex items-center justify-between gap-8">
           <Link to="/">
-            <h1 className="text-3xl font-bold text-primary font-mono tracking-tight">
+            <h1 className="text-2xl font-bold text-primary font-mono tracking-tight">
               NoteBook
             </h1>
           </Link>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             {user && (
               <>
                 <div className="flex items-center gap-2">
@@ -30,12 +30,12 @@ const Navbar = () => {
                   <span className="hidden md:inline">{user.name}</span>
                 </div>
 
-                <Link to={"/create"} className="btn btn-primary">
-                  <PlusIcon className="size-5" />
+                <Link to={"/create"} className="btn btn-primary btn-sm rounded-full">
+                  <PlusIcon className="size-4" />
                   <span className="hidden md:inline">New Note</span>
                 </Link>
 
-                <button onClick={logout} className="btn btn-ghost btn-circle" title="Logout">
+                <button onClick={logout} className="btn btn-ghost btn-circle btn-sm" title="Logout">
                   <LogOut className="size-5" />
                 </button>
               </>

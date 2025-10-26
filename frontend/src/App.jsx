@@ -14,7 +14,7 @@ const App = () => {
   return (
     <div className="relative h-full w-full min-h-screen">
       {/* Grid Background */}
-      <div className="absolute inset-0 -z-10 h-full w-full bg-black bg-[linear-gradient(to_right,#1f1f1f_1px,transparent_1px),linear-gradient(to_bottom,#1f1f1f_1px,transparent_1px)] bg-[size:6rem_4rem]" />
+      <div className="absolute inset-0 -z-10 h-full w-full bg-[#1a1a1a] bg-[linear-gradient(to_right,#2a2a2a_1px,transparent_1px),linear-gradient(to_bottom,#2a2a2a_1px,transparent_1px)] bg-[size:6rem_4rem]" />
 
       <Routes>
         {/* Public routes */}
