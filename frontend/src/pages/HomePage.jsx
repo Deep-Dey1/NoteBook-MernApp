@@ -6,7 +6,6 @@ import api from "../lib/axios";
 import toast from "react-hot-toast";
 import NoteCard from "../components/NoteCard";
 import NotesNotFound from "../components/NotesNotFound";
-import GitHubButton from "../components/GitHubButton";
 
 const HomePage = () => {
   const [isRateLimited, setIsRateLimited] = useState(false);
@@ -39,9 +38,6 @@ const HomePage = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
-
-      {/* GitHub Button - only on dashboard */}
-      <GitHubButton />
 
       {isRateLimited && <RateLimitedUI />}
 
