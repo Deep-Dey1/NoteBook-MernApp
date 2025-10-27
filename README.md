@@ -4,7 +4,7 @@
 
 - 🧱 Full-Stack App Built with the MERN Stack (MongoDB, Express, React, Node)
 - ✨ Create, Update, and Delete Notes with Title & Description
-- 🛠️ Build and Test a Fully Functional REST API
+- 🛠️ Build and Tested a Fully Functional REST APIs
 - ⚙️ Rate Limiting with Upstash Redis 
 - 🚀 Completely Responsive UI
 
