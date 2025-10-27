@@ -33,8 +33,8 @@ const ForgotPasswordPage = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
-      <div className="max-w-md w-full">
-        <div className="card bg-base-100 shadow-xl">
+      <div className="max-w-md w-full form-area">
+        <div className="card bg-base-100 shadow-xl card-glow">
           <div className="card-body">
             <Link to="/login" className="btn btn-ghost btn-sm mb-2 w-fit">
               <ArrowLeft className="size-4" />
@@ -58,7 +58,7 @@ const ForgotPasswordPage = () => {
                   <input
                     type="email"
                     placeholder="Enter your email"
-                    className="input input-bordered w-full pl-10"
+                    className="input input-bordered w-full pl-10 input-glow"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />

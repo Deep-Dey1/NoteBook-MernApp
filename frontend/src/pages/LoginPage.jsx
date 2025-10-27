@@ -36,18 +36,18 @@ const LoginPage = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-8">
-      <div className="max-w-md w-full">
+      <div className="max-w-md w-full form-area">
         {/* Logo/Brand */}
         <div className="text-center mb-8 animate-fade-in-down">
           <Link to="/" className="inline-block group">
-            <h1 className="text-4xl font-bold text-primary font-mono tracking-tight mb-2 hover:scale-105 transition-all duration-300 hover:drop-shadow-[0_0_15px_rgba(168,85,247,0.8)]">
+            <h1 className="text-4xl font-bold text-primary font-mono tracking-tight mb-2 hover:scale-105 transition-all duration-300">
               NoteBook
             </h1>
           </Link>
           <p className="text-base-content/70">Welcome back! Please login to continue</p>
         </div>
 
-        <div className="card bg-base-100 shadow-2xl border border-base-content/10 animate-fade-in-up hover:shadow-[0_20px_50px_rgba(168,85,247,0.4)] transition-all duration-500">
+        <div className="card bg-base-100 shadow-2xl border border-base-content/10 animate-fade-in-up card-glow transition-all duration-500">
           <div className="card-body">
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Email Input */}
@@ -62,7 +62,7 @@ const LoginPage = () => {
                   <input
                     type="email"
                     placeholder="you@example.com"
-                    className="input input-bordered w-full pl-10 focus:input-primary transition-all hover:scale-[1.02] focus:scale-[1.02] duration-200"
+                    className="input input-bordered w-full pl-10 focus:input-primary transition-all hover:scale-[1.02] focus:scale-[1.02] duration-200 input-glow"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
@@ -81,7 +81,7 @@ const LoginPage = () => {
                   <input
                     type={showPassword ? "text" : "password"}
                     placeholder="Enter your password"
-                    className="input input-bordered w-full pl-10 pr-10 focus:input-primary transition-all hover:scale-[1.02] focus:scale-[1.02] duration-200"
+                    className="input input-bordered w-full pl-10 pr-10 focus:input-primary transition-all hover:scale-[1.02] focus:scale-[1.02] duration-200 input-glow"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />

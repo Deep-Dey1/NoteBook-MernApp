@@ -95,3 +95,63 @@
 .animate-shake {
   animation: shake 0.5s ease-in-out;
 }
+
+/* Green glow variables and animated halo */
+:root {
+  --glow-hex: #6aeb7f;
+  --glow-rgb: 106,235,127;
+}
+
+@keyframes glowPulse {
+  0% { box-shadow: 0 0 8px rgba(var(--glow-rgb), 0.25), 0 0 20px rgba(var(--glow-rgb), 0.12); transform: translateZ(0) scale(1); }
+  50% { box-shadow: 0 0 14px rgba(var(--glow-rgb), 0.35), 0 0 28px rgba(var(--glow-rgb), 0.18); transform: translateZ(0) scale(1.01); }
+  100% { box-shadow: 0 0 8px rgba(var(--glow-rgb), 0.25), 0 0 20px rgba(var(--glow-rgb), 0.12); transform: translateZ(0) scale(1); }
+}
+
+@keyframes glowMove {
+  0% { filter: hue-rotate(0deg) blur(6px); transform: translate3d(-2px,-2px,0) scale(1); }
+  50% { filter: hue-rotate(12deg) blur(10px); transform: translate3d(2px,2px,0) scale(1.02); }
+  100% { filter: hue-rotate(0deg) blur(6px); transform: translate3d(-2px,-2px,0) scale(1); }
+}
+
+/* animated halo using pseudo-element */
+.glow-animated {
+  position: relative;
+  z-index: 10;
+}
+.glow-animated::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 140%;
+  height: 140%;
+  pointer-events: none;
+  border-radius: 14px;
+  background: radial-gradient(circle at center, rgba(var(--glow-rgb),0.45) 0%, rgba(var(--glow-rgb),0.18) 25%, rgba(var(--glow-rgb),0.08) 50%, rgba(0,0,0,0) 70%);
+  opacity: 0;
+  transition: opacity 240ms ease, transform 240ms ease;
+}
+
+/* show animated halo when hovered or when any input in the form area is focused */
+.glow-animated:hover::after,
+.form-area:focus-within .glow-animated::after {
+  opacity: 1;
+  animation: glowPulse 1.6s ease-in-out infinite, glowMove 3.2s ease-in-out infinite;
+}
+
+/* Card glow on hover */
+.card-glow {
+  transition: box-shadow 220ms ease, transform 220ms ease;
+}
+.card-glow:hover {
+  box-shadow: 0 20px 50px rgba(var(--glow-rgb), 0.18), 0 6px 24px rgba(var(--glow-rgb), 0.12);
+  transform: translateY(-4px);
+}
+
+/* small helper: apply green glow to input on focus */
+.input-glow:focus {
+  box-shadow: 0 8px 28px rgba(var(--glow-rgb), 0.12), 0 0 10px rgba(var(--glow-rgb),0.08) !important;
+  border-color: var(--glow-hex) !important;
+}

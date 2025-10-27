@@ -109,8 +109,8 @@ const ResetPasswordPage = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-8">
-      <div className="max-w-md w-full">
-        <div className="card bg-base-100 shadow-xl">
+      <div className="max-w-md w-full form-area">
+        <div className="card bg-base-100 shadow-xl card-glow">
           <div className="card-body">
             <Link to="/forgot-password" className="btn btn-ghost btn-sm mb-2 w-fit">
               <ArrowLeft className="size-4" />
@@ -143,7 +143,7 @@ const ResetPasswordPage = () => {
                       type="text"
                       inputMode="numeric"
                       maxLength={1}
-                      className="input input-bordered w-12 h-12 text-center text-lg font-bold"
+                      className="input input-bordered w-12 h-12 text-center text-lg font-bold input-glow"
                       value={digit}
                       onChange={(e) => handleOtpChange(index, e.target.value)}
                       onKeyDown={(e) => handleKeyDown(index, e)}
@@ -160,7 +160,7 @@ const ResetPasswordPage = () => {
                 <input
                   type="password"
                   placeholder="Enter new password"
-                  className="input input-bordered"
+                  className="input input-bordered input-glow"
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
                 />
@@ -181,7 +181,7 @@ const ResetPasswordPage = () => {
                 <input
                   type="password"
                   placeholder="Confirm new password"
-                  className="input input-bordered"
+                  className="input input-bordered input-glow"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 />
